@@ -1,1 +1,19 @@
+*.o
+*.out
+*.exe
+*.dll
+
+
+build/
+bin/
+
+
+.dist/
+.DS_Store
+.vscode/
+
+
+IsingSim1D
+1D_test
+
 
