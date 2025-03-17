@@ -5,7 +5,90 @@
 #include "IsingModel.h"
 
 
+#ifdef TEST
+void run2DTests() {
+    std::cout << "=== 2D TESTING MODE ===" << std::endl;
+
+    // Test 1
+    IsingModel2D modeltest1(0.0, 2);
+    modeltest1.getSpins() = {
+        {+1, +1},
+        {+1, +1}
+    };
+    modeltest1.spins_print();
+    std::cout << "Expected Energy: -4\n";
+    modeltest1.spins_stats();
+
+    // Test 2
+    std::cout << "-----------------\n";
+    IsingModel2D modeltest2(0.0, 2);
+    modeltest2.getSpins() = {
+        {+1, -1},
+        {-1, +1}
+    };
+    modeltest2.spins_print();
+    std::cout << "Expected Energy: 4\n";
+    modeltest2.spins_stats();
+
+
+    // Test 3
+    std::cout << "-----------------\n";
+    IsingModel2D modeltest3(0.0, 2);
+    modeltest3.getSpins() = {
+        {+1, +1},
+        {+1, -1}
+    };
+    modeltest3.spins_print();
+    std::cout << "Expected Energy: 0\n";
+    modeltest3.spins_stats();
+
+    // Test 4
+    std::cout << "-----------------\n";
+    IsingModel2D modeltest4(0.0, 3);
+    modeltest4.getSpins() = {
+        {+1, +1, +1},
+        {+1, +1, -1},
+        {+1, +1, +1}
+    };
+    modeltest4.spins_print();
+    std::cout << "Expected Energy: -6\n";
+    modeltest4.spins_stats();
+
+    // Test 5
+    std::cout << "-----------------\n";
+    IsingModel2D modeltest5(0.0, 3);
+    modeltest5.getSpins() = {
+        {+1, +1, +1},
+        {+1, +1, +1},
+        {+1, +1, +1}
+    };
+    modeltest5.spins_print();
+    std::cout << "Expected Energy: -12\n"; 
+    modeltest5.spins_stats();
+
+    // Test 6
+    std::cout << "-----------------\n";
+    IsingModel2D modeltest6(0.0, 3);
+    modeltest6.getSpins() = {
+        {+1, -1, +1},
+        {-1, +1, -1},
+        {+1, -1, +1}
+    };
+    modeltest6.spins_print();
+    std::cout << "Expected Energy: 12\n";
+    modeltest6.spins_stats();
+    std::cout << "-----------------\n";
+}
+#endif
+
+
 int main(int argc, char* argv[]) {
+
+    // Run tests if TEST is defined
+    #ifdef TEST
+        run2DTests();
+        return 0;
+    #endif
 
     // Check command line arguments
     if (argc < 4) {
