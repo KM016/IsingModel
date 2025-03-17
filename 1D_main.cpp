@@ -6,7 +6,37 @@
 #include <iomanip> 
 #include <sstream>
 
+// Tests for 1D model as seen in the information
+#ifdef TEST
+void runTests() {
+    std::cout << "=== TESTING MODE ===" << std::endl;
+    
+    // Test all 8 states for 3 spins
+    const std::vector<std::vector<int>> test_states = {
+        {+1, +1, +1}, {+1, +1, -1}, {+1, -1, +1}, {+1, -1, -1},
+        {-1, +1, +1}, {-1, +1, -1}, {-1, -1, +1}, {-1, -1, -1}
+    };
+
+    IsingModel model(0.0, 3); // Beta = 0
+
+    for (const auto& state : test_states) {
+        model.getSpin() = state;
+        std::cout << "State: ";
+        model.spins_print();
+        model.spins_stats();
+        std::cout << "-----------------" << std::endl;
+    }
+}
+#endif
+
 int main(int argc, char* argv[]){
+    
+    // Run tests if TEST is defined
+    #ifdef TEST
+        runTests();
+        return 0;
+    #endif
+
     // Check command line arguments
     if (argc < 3){
         std::cerr << "Usage: " << argv[0] << " <beta> <n_configs>" << std::endl;
