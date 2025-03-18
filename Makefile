@@ -27,4 +27,4 @@ test:
 
 # Clean target to remove objects and executables
 clean:
-	rm -f $(OBJECTS) $(TARGET) Ising_tests
+	rm -f $(OBJECTS) $(TARGET) IsingTests
