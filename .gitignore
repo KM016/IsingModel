@@ -16,4 +16,10 @@ bin/
 IsingSim1D
 1D_test
 
+IsingSim2D
+2D_test
+
+IsingModel
+IsingTests
+
 
