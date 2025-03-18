@@ -78,7 +78,7 @@ void IsingModel::spins_stats() {
     double energy = totalEnergy();
     double magnetisation = totalMagnetisation();
 
-    std::cout << "Energy: " << energy << "  Magnetization: " << magnetisation << std::endl;
+    std::cout << "Energy: " << energy << "  Magnetisation: " << magnetisation << std::endl;
 }
 
 
@@ -105,10 +105,10 @@ void IsingModel2D::initSpins() {
 // Change in energy from flipping spin at (x, y)
 double IsingModel2D::delta_E(int x, int y) const {
     int current = spins[x][y];
-    int left = (x > 0) ? spins[x-1][y] : 0;    // Open boundary
-    int right = (x < L-1) ? spins[x+1][y] : 0; // Open boundary
-    int up = (y > 0) ? spins[x][y-1] : 0;      // Open boundary
-    int down = (y < L-1) ? spins[x][y+1] : 0;  // Open boundary
+    int left = (x > 0) ? spins[x-1][y] : 0;    
+    int right = (x < L-1) ? spins[x+1][y] : 0; 
+    int up = (y > 0) ? spins[x][y-1] : 0;      
+    int down = (y < L-1) ? spins[x][y+1] : 0; 
     return 2 * J * current * (left + right + up + down);
 }
 
@@ -167,5 +167,5 @@ void IsingModel2D::spins_print() const {
 // Print spin energy and magnetisation
 void IsingModel2D::spins_stats() const {
     std::cout << "Energy: " << totalEnergy() 
-              << "  Magnetization: " << totalMagnetisation() << std::endl;
+              << "  Magnetisation: " << totalMagnetisation() << std::endl;
 }
