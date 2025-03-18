@@ -101,3 +101,7 @@ The analysis.py script reads the simulation results from data_1D/ and data_2D/, 
 - main():
     - Iterates over a range of β values to generate and save trend plots for energy and magnetisation.
 
+### Distribution Tests 
+- run: ./run_distTest.sh
+- output will be visualisations of test cases with beta = 0 and 10 and a 2x2 test case with beta = 0 and 10
+- these visualisations confirm the model is correct as visualisations match theoretical distributions

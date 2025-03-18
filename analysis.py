@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-def analyze_beta_1D(beta):
+def analyse_beta_1D(beta):
     """Analyze 1D simulation results for a given beta value."""
     os.makedirs("visualisations_1D", exist_ok=True)
     
@@ -15,16 +15,18 @@ def analyze_beta_1D(beta):
     avg_E = np.mean(energies)
     avg_M = np.mean(np.abs(magnetisations))
     
-    # Plot distributions for 1D
+    # Plot histograms for 1D
     plt.figure(figsize=(12, 5))
     plt.subplot(121)
-    plt.hist(energies, bins=50, density=True, color='skyblue', edgecolor='black')
-    plt.title(f"1D Energy Distribution (β={beta})")
+    plt.hist(energies, bins=15, color='skyblue', edgecolor='black')
+    plt.title(f"1D Energy Histogram (β={beta})")
+    plt.ylabel("Frequency")
     plt.xlabel("Energy")
     
     plt.subplot(122)
-    plt.hist(magnetisations, bins=50, density=True, color='salmon', edgecolor='black')
-    plt.title(f"1D Magnetisation Distribution (β={beta})")
+    plt.hist(magnetisations, bins=15, color='salmon', edgecolor='black')
+    plt.title(f"1D Magnetisation Histogram (β={beta})")
+    plt.ylabel("Frequency")
     plt.xlabel("Magnetisation")
     
     plt.tight_layout()
@@ -33,7 +35,7 @@ def analyze_beta_1D(beta):
     
     return avg_E, avg_M
 
-def analyze_beta_2D(beta):
+def analyse_beta_2D(beta):
     """Analyze 2D simulation results for a given beta value."""
     folder = f"data_2D/beta_{beta:.1f}/results.txt"
     if not os.path.exists(folder):
@@ -41,25 +43,25 @@ def analyze_beta_2D(beta):
         return None, None
     
     data = np.loadtxt(folder, skiprows=1)
-    energies = data[:, 0]
-    magnetisations = data[:, 1]
+    energies2 = data[:, 0]
+    magnetisations2 = data[:, 1]
     
-    avg_energy = np.mean(energies)
-    avg_magnetisation = np.mean(np.abs(magnetisations))
+    avg_energy = np.mean(energies2)
+    avg_magnetisation = np.mean(np.abs(magnetisations2))
     
-    # Plot distributions for 2D
+    # Plot histograms for 2D
     plt.figure(figsize=(12, 5))
     plt.subplot(121)
-    plt.hist(energies, bins=50, density=True, color='skyblue', edgecolor='black')
-    plt.title(f"2D Energy Distribution (β={beta})")
+    plt.hist(energies2, bins=15, color='skyblue', edgecolor='black')
+    plt.title(f"2D Energy Histogram (β={beta})")
     plt.xlabel("Energy")
-    plt.ylabel("Density")
+    plt.ylabel("Frequency")
     
     plt.subplot(122)
-    plt.hist(magnetisations, bins=50, density=True, color='salmon', edgecolor='black')
-    plt.title(f"2D Magnetisation Distribution (β={beta})")
+    plt.hist(magnetisations2,bins=15, color='salmon', edgecolor='black')
+    plt.title(f"2D Magnetisation Histogram (β={beta})")
     plt.xlabel("Magnetisation")
-    plt.ylabel("Density")
+    plt.ylabel("Frequency")
     
     plt.tight_layout()
     os.makedirs("visualisations_2D", exist_ok=True)
@@ -69,13 +71,13 @@ def analyze_beta_2D(beta):
     return avg_energy, avg_magnetisation
 
 def main():
-    # List of beta values to analyze
+    # List of beta values to analyse
     betas = [0.0, 0.1, 0.5, 1.0, 2.0, 5.0, 10.0]
     
     # ANALYSIS FOR 1D
     results_1D = []
     for beta in betas:
-        avg_E, avg_M = analyze_beta_1D(beta)
+        avg_E, avg_M = analyse_beta_1D(beta)
         results_1D.append([beta, avg_E, avg_M])
     results_1D = np.array(results_1D, dtype=float)
     
@@ -100,7 +102,7 @@ def main():
     # ANALYSIS FOR 2D
     results_2D = []
     for beta in betas:
-        avg_E, avg_M = analyze_beta_2D(beta)
+        avg_E, avg_M = analyse_beta_2D(beta)
         if avg_E is not None:
             results_2D.append([beta, avg_E, avg_M])
     results_2D = np.array(results_2D, dtype=float)

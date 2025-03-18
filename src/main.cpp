@@ -132,7 +132,7 @@ int main(int argc, char* argv[]){
     double beta = std::atof(argv[2]);
     int num_configs = std::atoi(argv[3]);
 
-
+    // 1D Simulation procedure
     if (mode == "1D") {
         // For 1D simulation, the optional parameter is number of spins (default: 100)
         int n_spins = (argc >= 5) ? std::atoi(argv[4]) : 100;
@@ -162,10 +162,11 @@ int main(int argc, char* argv[]){
         std::cout << "1D simulation results written to " << filename << std::endl;
     }
 
+    // 2D Simulation procedure
     else if (mode == "2D") {
         // For 2D simulation, the optional parameter is grid size (default: 100)
         int grid_size = (argc >= 5) ? std::atoi(argv[4]) : 100;
-        const int n_steps = 1000; // Monte Carlo steps for 2D
+        const int n_steps = 10000; // Monte Carlo steps for 2D
 
         // Create output directory and file for 2D simulation results
         std::ostringstream stream;
@@ -181,8 +182,8 @@ int main(int argc, char* argv[]){
         outfile << "Energy\tMagnetisation\n";
 
         // Run simulation for each configuration
-        IsingModel2D model(beta, grid_size);
         for (int config = 0; config < num_configs; ++config) {
+            IsingModel2D model(beta, grid_size); // reinitialise model for each configuration
             model.simulate(n_steps);
             outfile << model.totalEnergy() << "\t" 
                     << model.totalMagnetisation() << "\n";
