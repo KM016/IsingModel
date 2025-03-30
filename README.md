@@ -48,6 +48,7 @@ The provided run.sh script automates the simulation and analysis process:
     - For a range of β values (0.0, 0.1, 0.5, 1.0, 2.0, 5.0, 10.0), the script runs both the 1D and 2D simulations.
 - Analyse Results:
     - The script uses python analysis.py, which generates visualisations (histograms and trend plots) for both simulation types.
+    - NOTE: when running you may want to make n_steps in the 2D part of IsingModel.cpp equal to 100,000 or 10,000 and increase num_configs_2D to match num_configs to save some time. 
 <br>
 
 ## Analysis and Visualisation

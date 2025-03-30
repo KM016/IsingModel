@@ -166,7 +166,7 @@ int main(int argc, char* argv[]){
     else if (mode == "2D") {
         // For 2D simulation, the optional parameter is grid size (default: 100)
         int grid_size = (argc >= 5) ? std::atoi(argv[4]) : 100;
-        const int n_steps = 10000; // Monte Carlo steps for 2D
+        const int n_steps = 10000000; // Monte Carlo steps for 2D
 
         // Create output directory and file for 2D simulation results
         std::ostringstream stream;

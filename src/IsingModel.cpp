@@ -105,12 +105,13 @@ void IsingModel2D::initSpins() {
 // Change in energy from flipping spin at (x, y)
 double IsingModel2D::delta_E(int x, int y) const {
     int current = spins[x][y];
-    int left = (x > 0) ? spins[x-1][y] : 0;    
-    int right = (x < L-1) ? spins[x+1][y] : 0; 
-    int up = (y > 0) ? spins[x][y-1] : 0;      
-    int down = (y < L-1) ? spins[x][y+1] : 0; 
+    int left  = spins[(x - 1 + L) % L][y];
+    int right = spins[(x + 1) % L][y];
+    int up    = spins[x][(y - 1 + L) % L];
+    int down  = spins[x][(y + 1) % L];
     return 2 * J * current * (left + right + up + down);
 }
+
 
 // Simulate the system for n_steps
 void IsingModel2D::simulate(int n_steps) {
@@ -129,16 +130,13 @@ double IsingModel2D::totalEnergy() const {
     double energy = 0.0;
     for (int x = 0; x < L; ++x) {
         for (int y = 0; y < L; ++y) {
-            if (x < L-1) {
-                energy += -J * spins[x][y] * spins[x+1][y];
-            }
-            if (y < L-1) {
-                energy += -J * spins[x][y] * spins[x][y+1];
-            }
+            energy += -J * spins[x][y] * spins[(x + 1) % L][y];
+            energy += -J * spins[x][y] * spins[x][(y + 1) % L];
         }
     }
     return energy;
 }
+
 
 // Calculate total magnetisation
 double IsingModel2D::totalMagnetisation() const {
